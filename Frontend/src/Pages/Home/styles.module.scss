@@ -1,0 +1,76 @@
+.homePage {
+    width: 100%;
+    background-color: #f4f4f4; /* Cor mais suave para o fundo */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Layout de grid responsivo */
+    gap: 20px;
+    padding: 3% 5%;
+    box-sizing: border-box;
+}
+
+.card {
+    border: none; /* Remover bordas para um visual mais limpo */
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição suave */
+    overflow: hidden; /* Garante que as imagens não saiam da borda */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Efeito de "elevação" ao passar o mouse */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.cardImage {
+    width: 100%;
+    height: 200px; /* Tamanho fixo da imagem */
+    object-fit: cover; /* Cobre o espaço sem distorcer a imagem */
+    border-bottom: 2px solid #f1f1f1; /* Linha sutil abaixo da imagem */
+}
+
+.cardTitle {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.addButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.addButton:hover {
+    background-color: #0056b3; /* Cor de fundo mais escura ao passar o mouse */
+}
+
+.addButton:focus {
+    outline: none;
+}
+
+@media (max-width: 768px) {
+    .homePage {
+        padding: 2% 5%;
+    }
+
+    .card {
+        border-radius: 8px;
+    }
+}

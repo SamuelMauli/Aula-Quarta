@@ -1,0 +1,100 @@
+.registerPage {
+    width: 100vw;
+    height: 100vh;
+    background-color: #f7f8fa; /* Cor de fundo clara */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    width: 100%;
+    max-width: 450px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    padding: 2rem;
+    background-color: white;
+}
+
+.cardHeader {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.label {
+    font-size: 1rem;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icon {
+    color: #007bff; /* Cor do ícone */
+}
+
+.input {
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+}
+
+.input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.buttonDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.button {
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.button:hover {
+    transform: translateY(-3px); /* Efeito de hover */
+}
+
+.button:focus {
+    outline: none;
+}
+
+.button.secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.button.primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.button.secondary:hover {
+    background-color: #5a6268;
+}
+
+.button.primary:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .card {
+        width: 90%;
+        padding: 1.5rem;
+    }
+}

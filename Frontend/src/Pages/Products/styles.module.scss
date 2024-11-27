@@ -1,0 +1,60 @@
+.productPage {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os itens se movam para a próxima linha quando não houver espaço suficiente */
+    justify-content: space-between; /* Espaçamento uniforme entre os itens */
+    padding: 3%;
+    background-color: #f9f9f9;
+}
+
+.card {
+    max-width: 600px; /* Impede que o cartão cresça demais */
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.button {
+    margin-top: 25px;
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    background-color: #28a745;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #218838;
+}
+
+input, select, button {
+    margin-bottom: 10px;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 1024px) {
+    .card {
+        width: 45%; /* 2 cartões por linha em telas médias */
+    }
+}
+
+@media (max-width: 768px) {
+    .productPage {
+        padding: 5%;
+    }
+
+    .card {
+        width: 100%; /* Em telas menores, cada cartão ocupa toda a largura */
+        padding: 1.5rem;
+    }
+}

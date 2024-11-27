@@ -1,0 +1,60 @@
+.paymentPage {
+    width: 100vw;
+    height: 90vh;
+    background-color: #f0f0f0; /* Fundo mais claro para contraste */
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 3% 10%;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif; /* Fonte mais limpa */
+}
+
+.card {
+    width: 100%;
+    max-width: 500px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Sombra suave para profundidade */
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Efeito de hover suave */
+}
+
+.cardTitle {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.cardText {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 1rem;
+}
+
+.cardText strong {
+    font-weight: 600;
+    color: #333;
+}
+
+.cardBody {
+    padding: 2rem;
+}
+
+@media (max-width: 768px) {
+    .paymentPage {
+        padding: 5%;
+    }
+
+    .card {
+        width: 100%;
+        padding: 1.5rem;
+    }
+}
