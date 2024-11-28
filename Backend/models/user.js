@@ -19,7 +19,16 @@ module.exports = (sequelize) =>{
         dataNasc: {
             type: Sequelize.DATE,
             allowNull: true
+        },
+        typeUser: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'typeUser',
+                key: 'id'
+            }
         }
+        
     });
 
     User.associate = function(models) {

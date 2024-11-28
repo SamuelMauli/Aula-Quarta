@@ -3,19 +3,24 @@
     width: 100%;
     background-color: #343a40; /* Fundo escuro */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    z-index: 1;
 }
 
 .nav-item {
     display: flex;
     align-items: center;
     font-size: 1rem;
-    padding: 10px;
+    padding: 10px 15px;
     color: #ffffff;
+    text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .nav-item:hover {
     color: #28a745; /* Cor de destaque para hover */
+    text-decoration: none; /* Remove o sublinhado no hover */
 }
 
 .icon {
@@ -29,10 +34,11 @@
     }
 
     .nav-item {
-        font-size: 1.1rem;
+        font-size: 1rem; /* Mantenha consistente para legibilidade em telas menores */
+        padding: 8px 12px;
     }
 
     .icon {
-        font-size: 1.4rem;
+        font-size: 1.2rem; /* Reduza para manter a proporção com o texto */
     }
 }
