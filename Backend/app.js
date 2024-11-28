@@ -12,6 +12,7 @@ var usersRouter = require('./routes/users');
 var productsRouter = require('./routes/product');
 var cartsRouter = require('./routes/cart');
 var paymentsRouter = require("./routes/payment");
+var supplierRouter = require('./routes/supplier');  // Importando as rotas de supplier
 
 var app = express();
 
@@ -27,6 +28,7 @@ app.use('/users', usersRouter);
 app.use('/products', productsRouter);
 app.use('/cart', cartsRouter);
 app.use('/payment', paymentsRouter);
+app.use('/suppliers', supplierRouter);  // Adicionando a rota de supplier
 
 const db = require('./models')
 

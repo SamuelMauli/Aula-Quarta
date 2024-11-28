@@ -1,38 +1,39 @@
 const product = require("../models/product");
 
-class ProductService{
-    constructor(ProductModel){
+class ProductService {
+    constructor(ProductModel) {
         this.Product = ProductModel;
     }
 
-    async create(name, description, price, quantity){
-        try{
+    // Criar um novo produto
+    async create(name, description, price, quantity) {
+        try {
             const newProduct = await this.Product.create({
                 name,
                 description,
                 price,
                 quantity
-            })
-            return newProduct ? newProduct : null
-        }
-        catch(error){
-            throw error;
-        }
-    }
-
-    async findAll(){
-        try{
-            const allProducts = await this.Product.findAll();
-            return allProducts ? allProducts : null
-        }
-        catch(error){
-            throw error;
+            });
+            return newProduct ? newProduct : null;
+        } catch (error) {
+            throw new Error('Erro ao criar o produto: ' + error.message);
         }
     }
 
-    async update(id, name, description, price, quantity){
+    // Buscar todos os produtos
+    async findAll() {
         try {
-            const updatedProducts = await this.Product.update(
+            const allProducts = await this.Product.findAll();
+            return allProducts && allProducts.length > 0 ? allProducts : [];
+        } catch (error) {
+            throw new Error('Erro ao buscar produtos: ' + error.message);
+        }
+    }
+
+    // Atualizar um produto existente
+    async update(id, name, description, price, quantity) {
+        try {
+            const [updatedCount] = await this.Product.update(
                 {
                     name,
                     description,
@@ -45,22 +46,23 @@ class ProductService{
                     }
                 }
             );
-            return updatedProducts ? updatedProducts : null;
+            return updatedCount > 0 ? { id, name, description, price, quantity } : null;
         } catch (error) {
-            throw error;
+            throw new Error('Erro ao atualizar o produto: ' + error.message);
         }
     }
 
-    async delete(id){
+    // Deletar um produto
+    async delete(id) {
         try {
             const deletedCount = await this.Product.destroy({
                 where: { id }
             });
             return deletedCount > 0;
         } catch (error) {
-            throw error;
+            throw new Error('Erro ao excluir o produto: ' + error.message);
         }
     }
 }
 
-module.exports = ProductService
+module.exports = ProductService;

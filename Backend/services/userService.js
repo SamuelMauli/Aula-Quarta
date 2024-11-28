@@ -14,7 +14,8 @@ class UserService{
             const newUser = await this.User.create({
                 email,
                 dataNasc,
-                password: hashPassword
+                password: hashPassword,
+                typeUser: 1
             })
             return newUser ? newUser : null
         }

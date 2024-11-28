@@ -5,7 +5,7 @@ import styles from './styles.module.scss';
 import { api } from '../../Services/api';
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from "react-router-dom";
-import { FaEnvelope, FaLock } from 'react-icons/fa'; // ícones para email e senha
+import { FaEnvelope, FaLock } from 'react-icons/fa'; 
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -14,21 +14,40 @@ export default function Login() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-
+    
         const user = { email, password };
+        const supplier = { email, password };  // Constante para fornecedor
         try {
-            const response = await api.post('/users/login', user, {
+            // Tenta login para o usuário comum
+            const userResponse = await api.post('/users/login', user, {
                 headers: {
                     "Content-Type": "application/json"
                 }
             });
-
-            localStorage.setItem("token", response.data.token);
-            navigate("/home");
-        } catch (error) {
-            console.error('Erro ao tentar fazer login:', error.response || error.message);
+    
+            // Se o login do usuário for bem-sucedido
+            localStorage.setItem("token", userResponse.data.token);
+            navigate("/home");  // Redireciona para a página de usuário comum
+        } catch (userError) {
+            // Se o login de usuário comum falhar, tenta o login para fornecedor
+            try {
+                const supplierResponse = await api.post('/suppliers/login', supplier, {
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                });
+    
+                // Se o login do fornecedor for bem-sucedido
+                localStorage.setItem("token", supplierResponse.data.token);
+                navigate("/products");  // Redireciona para a página de fornecedores
+            } catch (supplierError) {
+                // Se o login de fornecedor também falhar
+                console.error('Erro ao tentar fazer login como fornecedor:', supplierError.response || supplierError.message);
+                alert("Credenciais inválidas para usuário ou fornecedor.");
+            }
         }
     }
+    
 
     return (
         <div className={styles.loginPage}>

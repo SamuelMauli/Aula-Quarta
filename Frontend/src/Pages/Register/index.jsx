@@ -8,14 +8,23 @@ import { useNavigate } from "react-router-dom";
 import { FaEnvelope, FaLock, FaBirthdayCake, FaUserTie, FaBuilding } from 'react-icons/fa';
 
 export default function Register() {
-    const [typeUser, setTypeUser] = useState("user");
+    const [typeUser, setTypeUser] = useState("user"); // tipo de usuário, 'user' ou 'supplier'
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [dataNasc, setDataNasc] = useState("");
     const [cnpj, setCnpj] = useState("");
     const [nomeFornecedor, setNomeFornecedor] = useState("");
+    const [errorMessage, setErrorMessage] = useState(""); // Estado para armazenar a mensagem de erro
 
     const navigate = useNavigate();
+
+    // Variável que será usada para armazenar o tipo de usuário antes de enviar para o servidor
+    const [selectedType, setSelectedType] = useState("user");
+
+    const handleTypeChange = (type) => {
+        setSelectedType(type); // Atualiza o tipo de usuário com o tipo selecionado
+        setTypeUser(type); // Atualiza o estado do tipo de usuário para renderizar o formulário corretamente
+    };
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -24,19 +33,23 @@ export default function Register() {
             email, 
             password, 
             dataNasc, 
-            type_user: typeUser,
-            ...(typeUser === "supplier" && { cnpj, nomeFornecedor })
+            type_user: selectedType,  // Usa o tipo de usuário selecionado
+            ...(selectedType === "supplier" && { cnpj, nomeFornecedor })  // Adiciona os dados do fornecedor se for fornecedor
         };
 
+        const url = selectedType === "supplier" ? '/suppliers/newsupplier' : '/users/newUser';
+
         try {
-            const response = await api.post('/users/newUser', user, {
+            const response = await api.post(url, user, {
                 headers: {
                     "Content-Type": "application/json"
                 }
             });
 
-            navigate("/"); // Redireciona para a página de login
+            navigate("/");  // Redireciona para a página de login
         } catch (error) {
+            // Exibe a mensagem de erro se houver
+            setErrorMessage(error.response?.data?.error || 'Erro ao registrar usuário.'); // Mensagem de erro do backend
             console.error('Erro ao registrar usuário:', error.response || error.message);
         }
     }
@@ -59,8 +72,8 @@ export default function Register() {
                                     name="typeUser"
                                     id="user"
                                     value="user"
-                                    checked={typeUser === "user"}
-                                    onChange={() => setTypeUser("user")}
+                                    checked={selectedType === "user"}  // Controle local de tipo de usuário
+                                    onChange={() => handleTypeChange("user")}
                                 />
                                 <Form.Check
                                     inline
@@ -69,8 +82,8 @@ export default function Register() {
                                     name="typeUser"
                                     id="supplier"
                                     value="supplier"
-                                    checked={typeUser === "supplier"}
-                                    onChange={() => setTypeUser("supplier")}
+                                    checked={selectedType === "supplier"}  // Controle local de tipo de usuário
+                                    onChange={() => handleTypeChange("supplier")}
                                 />
                             </div>
                         </Form.Group>
@@ -103,7 +116,7 @@ export default function Register() {
                             />
                         </Form.Group>
 
-                        {typeUser === "supplier" && (
+                        {selectedType === "supplier" && (
                             <>
                                 <Form.Group controlId="nomeFornecedor">
                                     <Form.Label className={styles.label}>
@@ -137,7 +150,7 @@ export default function Register() {
 
                         <Form.Group controlId="dataNasc">
                             <Form.Label className={styles.label}>
-                                <FaBirthdayCake className={styles.icon} /> Data atual 
+                                <FaBirthdayCake className={styles.icon} /> Data de Nascimento
                             </Form.Label>
                             <Form.Control
                                 className={styles.input}
@@ -147,6 +160,12 @@ export default function Register() {
                                 required
                             />
                         </Form.Group>
+
+                        {errorMessage && (
+                            <div className={styles.errorMessage}>
+                                <strong>{errorMessage}</strong>
+                            </div>
+                        )}
 
                         <div className={styles.buttonDiv}>
                             <Button variant="primary" type="submit" className={styles.button}>

@@ -19,9 +19,6 @@ export default function NavBar() {
                             <Nav.Link href="/home" className={styles.navItem}>
                                 <FaHome className={styles.icon} /> Home
                             </Nav.Link>
-                            <Nav.Link href="/products" className={styles.navItem}>
-                                <FaProductHunt className={styles.icon} /> Produtos
-                            </Nav.Link>
                             <Nav.Link href="/cart" className={styles.navItem}>
                                 <FaShoppingCart className={styles.icon} /> Carrinho
                             </Nav.Link>
